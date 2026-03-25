@@ -2,10 +2,8 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# ------------------ LOAD MODELS ------------------
+# ------------------ LOAD MODEL ------------------
 log_model = joblib.load('models/logistic_model.pkl')
-rf_model = joblib.load('models/rf_model.pkl')
-xgb_model = joblib.load('models/xgb_model.pkl')
 
 # ------------------ PAGE CONFIG ------------------
 st.set_page_config(
@@ -32,24 +30,17 @@ st.sidebar.markdown("---")
 st.sidebar.title("📊 Project Info")
 st.sidebar.write("""
 This project predicts whether a customer is **High Risk or Low Risk**  
-using Machine Learning models.
+using **Logistic Regression**.
 
-Models used:
-- Logistic Regression  
-- Random Forest  
-- XGBoost  
+✔ Built using Machine Learning  
+✔ Data preprocessing with Pipeline  
+✔ Deployed using Streamlit  
 """)
 
 # ------------------ MAIN UI ------------------
 st.title("💳 Credit Risk Prediction System")
 
 st.write("Enter customer details below:")
-
-# ------------------ MODEL SELECT ------------------
-model_choice = st.selectbox(
-    "Choose Model",
-    ["Logistic Regression", "Random Forest", "XGBoost"]
-)
 
 # ------------------ INPUT FIELDS ------------------
 col1, col2 = st.columns(2)
@@ -74,24 +65,14 @@ if st.button("🔍 Predict Risk"):
         'person_emp_length': [emp_length]
     })
 
-    # Match training columns
-    input_data = input_data.reindex(columns=log_model.feature_names_in_, fill_value=0)
-
-    # Select model
-    if model_choice == "Logistic Regression":
-        prediction = log_model.predict(input_data)
-        prob = log_model.predict_proba(input_data)[0][1]
-    elif model_choice == "Random Forest":
-        prediction = rf_model.predict(input_data)
-        prob = rf_model.predict_proba(input_data)[0][1]
-    else:
-        prediction = xgb_model.predict(input_data)
-        prob = xgb_model.predict_proba(input_data)[0][1]
+    # Predict (Pipeline handles scaling automatically)
+    prediction = log_model.predict(input_data)
+    probability = log_model.predict_proba(input_data)[0][1]
 
     # ------------------ OUTPUT ------------------
     st.subheader("📊 Result")
 
     if prediction[0] == 1:
-        st.error(f"⚠️ High Risk Customer (Probability: {prob:.2f})")
+        st.error(f"⚠️ High Risk Customer (Risk Score: {probability:.2f})")
     else:
-        st.success(f"✅ Low Risk Customer (Probability: {prob:.2f})")
+        st.success(f"✅ Low Risk Customer (Risk Score: {probability:.2f})")
