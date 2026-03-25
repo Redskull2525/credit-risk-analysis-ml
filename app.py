@@ -6,10 +6,7 @@ import joblib
 log_model = joblib.load('models/logistic_model.pkl')
 
 # ------------------ PAGE CONFIG ------------------
-st.set_page_config(
-    page_title="Credit Risk App",
-    layout="wide"
-)
+st.set_page_config(page_title="Credit Risk App", layout="wide")
 
 # ------------------ SIDEBAR ------------------
 st.sidebar.title("👨‍💻 About Me")
@@ -29,20 +26,13 @@ st.sidebar.markdown("---")
 
 st.sidebar.title("📊 Project Info")
 st.sidebar.write("""
-This project predicts whether a customer is **High Risk or Low Risk**  
-using **Logistic Regression**.
-
-✔ Built using Machine Learning  
-✔ Data preprocessing with Pipeline  
-✔ Deployed using Streamlit  
+Credit Risk Prediction using Logistic Regression  
 """)
 
 # ------------------ MAIN UI ------------------
 st.title("💳 Credit Risk Prediction System")
 
-st.write("Enter customer details below:")
-
-# ------------------ INPUT FIELDS ------------------
+# Inputs
 col1, col2 = st.columns(2)
 
 with col1:
@@ -54,9 +44,10 @@ with col2:
     interest_rate = st.number_input("📈 Interest Rate", min_value=0.0)
     emp_length = st.number_input("💼 Employment Length", min_value=0)
 
-# ------------------ PREDICTION ------------------
+# ------------------ PREDICT ------------------
 if st.button("🔍 Predict Risk"):
 
+    # ✅ EXACT SAME FEATURE ORDER AS TRAINING
     input_data = pd.DataFrame({
         'person_income': [income],
         'person_age': [age],
@@ -65,11 +56,14 @@ if st.button("🔍 Predict Risk"):
         'person_emp_length': [emp_length]
     })
 
-    # Predict (Pipeline handles scaling automatically)
+    # 🔥 FORCE COLUMN ORDER MATCH
+    input_data = input_data[log_model.feature_names_in_]
+
+    # Prediction
     prediction = log_model.predict(input_data)
     probability = log_model.predict_proba(input_data)[0][1]
 
-    # ------------------ OUTPUT ------------------
+    # Output
     st.subheader("📊 Result")
 
     if prediction[0] == 1:
