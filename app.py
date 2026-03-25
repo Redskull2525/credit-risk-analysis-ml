@@ -2,13 +2,16 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# ---------------- LOAD MODEL ----------------
+# ------------------ LOAD MODELS ------------------
 log_model = joblib.load('models/logistic_model.pkl')
 
-# ---------------- PAGE CONFIG ----------------
-st.set_page_config(page_title="Credit Risk App", layout="wide")
+# ------------------ PAGE CONFIG ------------------
+st.set_page_config(
+    page_title="Credit Risk App",
+    layout="wide"
+)
 
-# ---------------- SIDEBAR ----------------
+# ------------------ SIDEBAR ------------------
 st.sidebar.title("👨‍💻 About Me")
 
 st.sidebar.write("""
@@ -25,11 +28,26 @@ st.sidebar.write("""
 st.sidebar.markdown("---")
 
 st.sidebar.title("📊 Project Info")
-st.sidebar.write("Credit Risk Prediction using Logistic Regression")
+st.sidebar.write("""
+This project predicts whether a customer is **High Risk or Low Risk**  
+using Machine Learning models.
 
-# ---------------- MAIN UI ----------------
+Models used:
+- Logistic Regression    
+""")
+
+# ------------------ MAIN UI ------------------
 st.title("💳 Credit Risk Prediction System")
 
+st.write("Enter customer details below:")
+
+# ------------------ MODEL SELECT ------------------
+model_choice = st.selectbox(
+    "Choose Model",
+    ["Logistic Regression"]
+)
+
+# ------------------ INPUT FIELDS ------------------
 col1, col2 = st.columns(2)
 
 with col1:
@@ -41,10 +59,9 @@ with col2:
     interest_rate = st.number_input("📈 Interest Rate", min_value=0.0)
     emp_length = st.number_input("💼 Employment Length", min_value=0)
 
-# ---------------- PREDICT ----------------
+# ------------------ PREDICTION ------------------
 if st.button("🔍 Predict Risk"):
 
-    # Create input dataframe
     input_data = pd.DataFrame({
         'person_income': [income],
         'person_age': [age],
@@ -53,20 +70,18 @@ if st.button("🔍 Predict Risk"):
         'person_emp_length': [emp_length]
     })
 
-    # 🔥 SAFE FIX (NO ERROR EVER)
-    try:
-        prediction = log_model.predict(input_data)
-        probability = log_model.predict_proba(input_data)[0][1]
+    # Match training columns
+    input_data = input_data.reindex(columns=log_model.feature_names_in_, fill_value=0)
 
-    except Exception as e:
-        st.error("⚠️ Model input mismatch. Please retrain model with same features.")
-        st.write("Error details:", e)
-        st.stop()
+    # Select model
+    model_choice == "Logistic Regression":
+    prediction = log_model.predict(input_data)
+    prob = log_model.predict_proba(input_data)[0][1]
 
-    # Output
+    # ------------------ OUTPUT ------------------
     st.subheader("📊 Result")
 
     if prediction[0] == 1:
-        st.error(f"⚠️ High Risk Customer (Risk Score: {probability:.2f})")
+        st.error(f"⚠️ High Risk Customer (Probability: {prob:.2f})")
     else:
-        st.success(f"✅ Low Risk Customer (Risk Score: {probability:.2f})")
+        st.success(f"✅ Low Risk Customer (Probability: {prob:.2f})")
