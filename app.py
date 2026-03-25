@@ -41,11 +41,6 @@ st.title("💳 Credit Risk Prediction System")
 
 st.write("Enter customer details below:")
 
-# ------------------ MODEL SELECT ------------------
-model_choice = st.selectbox(
-    "Choose Model",
-    ["Logistic Regression"]
-)
 
 # ------------------ INPUT FIELDS ------------------
 col1, col2 = st.columns(2)
