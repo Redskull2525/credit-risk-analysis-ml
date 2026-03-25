@@ -55,8 +55,10 @@ with col2:
     emp_length = st.number_input("💼 Employment Length", min_value=0)
 
 # ------------------ PREDICTION ------------------
+# ------------------ PREDICTION ------------------
 if st.button("🔍 Predict Risk"):
 
+    # Create input data
     input_data = pd.DataFrame({
         'person_income': [income],
         'person_age': [age],
@@ -65,14 +67,22 @@ if st.button("🔍 Predict Risk"):
         'person_emp_length': [emp_length]
     })
 
-    # Match training columns
-    input_data = input_data.reindex(columns=log_model.feature_names_in_, fill_value=0)
+    # ✅ SAFE FIX (NO dependency on feature_names_in_)
+    expected_cols = [
+        'person_income',
+        'person_age',
+        'loan_amnt',
+        'loan_int_rate',
+        'person_emp_length'
+    ]
 
-    #prediction
+    input_data = input_data[expected_cols]
+
+    # Prediction
     prediction = log_model.predict(input_data)
     prob = log_model.predict_proba(input_data)[0][1]
 
-    # ------------------ OUTPUT ------------------
+    # Output
     st.subheader("📊 Result")
 
     if prediction[0] == 1:
