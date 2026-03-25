@@ -74,7 +74,7 @@ if st.button("🔍 Predict Risk"):
     input_data = input_data.reindex(columns=log_model.feature_names_in_, fill_value=0)
 
     # Select model
-    model_choice == "Logistic Regression":
+    model_choice == "Logistic Regression"
     prediction = log_model.predict(input_data)
     prob = log_model.predict_proba(input_data)[0][1]
 
