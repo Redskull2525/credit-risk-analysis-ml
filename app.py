@@ -2,13 +2,13 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# ------------------ LOAD MODEL ------------------
+# ---------------- LOAD MODEL ----------------
 log_model = joblib.load('models/logistic_model.pkl')
 
-# ------------------ PAGE CONFIG ------------------
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="Credit Risk App", layout="wide")
 
-# ------------------ SIDEBAR ------------------
+# ---------------- SIDEBAR ----------------
 st.sidebar.title("👨‍💻 About Me")
 
 st.sidebar.write("""
@@ -25,14 +25,11 @@ st.sidebar.write("""
 st.sidebar.markdown("---")
 
 st.sidebar.title("📊 Project Info")
-st.sidebar.write("""
-Credit Risk Prediction using Logistic Regression  
-""")
+st.sidebar.write("Credit Risk Prediction using Logistic Regression")
 
-# ------------------ MAIN UI ------------------
+# ---------------- MAIN UI ----------------
 st.title("💳 Credit Risk Prediction System")
 
-# Inputs
 col1, col2 = st.columns(2)
 
 with col1:
@@ -44,10 +41,10 @@ with col2:
     interest_rate = st.number_input("📈 Interest Rate", min_value=0.0)
     emp_length = st.number_input("💼 Employment Length", min_value=0)
 
-# ------------------ PREDICT ------------------
+# ---------------- PREDICT ----------------
 if st.button("🔍 Predict Risk"):
 
-    # ✅ EXACT SAME FEATURE ORDER AS TRAINING
+    # Create input dataframe
     input_data = pd.DataFrame({
         'person_income': [income],
         'person_age': [age],
@@ -56,12 +53,15 @@ if st.button("🔍 Predict Risk"):
         'person_emp_length': [emp_length]
     })
 
-    # 🔥 FORCE COLUMN ORDER MATCH
-    input_data = input_data[log_model.feature_names_in_]
+    # 🔥 SAFE FIX (NO ERROR EVER)
+    try:
+        prediction = log_model.predict(input_data)
+        probability = log_model.predict_proba(input_data)[0][1]
 
-    # Prediction
-    prediction = log_model.predict(input_data)
-    probability = log_model.predict_proba(input_data)[0][1]
+    except Exception as e:
+        st.error("⚠️ Model input mismatch. Please retrain model with same features.")
+        st.write("Error details:", e)
+        st.stop()
 
     # Output
     st.subheader("📊 Result")
