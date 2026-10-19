@@ -1,0 +1,413 @@
+{
+  "dataset": {
+    "name": "German Credit (OpenML credit-g v1 = UCI Statlog German Credit Data)",
+    "n_rows": 1000,
+    "n_train": 800,
+    "n_test": 200,
+    "bad_rate": 0.3,
+    "features_used": [
+      "duration",
+      "credit_amount",
+      "installment_commitment",
+      "residence_since",
+      "existing_credits",
+      "num_dependents",
+      "checking_status",
+      "credit_history",
+      "purpose",
+      "savings_status",
+      "employment",
+      "other_parties",
+      "property_magnitude",
+      "other_payment_plans",
+      "housing",
+      "job",
+      "own_telephone"
+    ],
+    "protected_attributes_excluded": [
+      "age",
+      "personal_status",
+      "foreign_worker"
+    ]
+  },
+  "split": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratified": true
+  },
+  "cross_validation": {
+    "n_folds": 5,
+    "candidates": {
+      "logistic_regression": {
+        "cv_roc_auc_mean": 0.7813616071428572,
+        "cv_roc_auc_std": 0.06717555132901931,
+        "cv_roc_auc_folds": [
+          0.7403,
+          0.9077,
+          0.7225,
+          0.7448,
+          0.7915
+        ],
+        "cv_pr_auc_mean": 0.6237685989840542,
+        "cv_pr_auc_std": 0.10583839935444053
+      },
+      "random_forest": {
+        "cv_roc_auc_mean": 0.7927083333333332,
+        "cv_roc_auc_std": 0.06540804929646865,
+        "cv_roc_auc_folds": [
+          0.7457,
+          0.9172,
+          0.7334,
+          0.7835,
+          0.7837
+        ],
+        "cv_pr_auc_mean": 0.6609897293210841,
+        "cv_pr_auc_std": 0.1126401202876005
+      }
+    },
+    "selected_model": "random_forest",
+    "selection_rule": "highest mean CV ROC-AUC"
+  },
+  "threshold": {
+    "method": "minimise expected cost on out-of-fold training predictions",
+    "costs": {
+      "false_negative": 5,
+      "false_positive": 1,
+      "source": "cost matrix published with the UCI Statlog German Credit dataset (an assumption)"
+    },
+    "chosen": 0.32,
+    "oof_cost_at_default_threshold": 511.0,
+    "oof_cost_at_chosen_threshold": 433.0,
+    "cost_table_oof": [
+      {
+        "threshold": 0.05,
+        "false_negatives": 0,
+        "false_positives": 556,
+        "rejected_share": 0.995,
+        "cost": 556.0
+      },
+      {
+        "threshold": 0.1,
+        "false_negatives": 1,
+        "false_positives": 532,
+        "rejected_share": 0.96375,
+        "cost": 537.0
+      },
+      {
+        "threshold": 0.15,
+        "false_negatives": 3,
+        "false_positives": 489,
+        "rejected_share": 0.9075,
+        "cost": 504.0
+      },
+      {
+        "threshold": 0.2,
+        "false_negatives": 5,
+        "false_positives": 437,
+        "rejected_share": 0.84,
+        "cost": 462.0
+      },
+      {
+        "threshold": 0.25,
+        "false_negatives": 14,
+        "false_positives": 390,
+        "rejected_share": 0.77,
+        "cost": 460.0
+      },
+      {
+        "threshold": 0.3,
+        "false_negatives": 21,
+        "false_positives": 344,
+        "rejected_share": 0.70375,
+        "cost": 449.0
+      },
+      {
+        "threshold": 0.32,
+        "false_negatives": 22,
+        "false_positives": 323,
+        "rejected_share": 0.67625,
+        "cost": 433.0
+      },
+      {
+        "threshold": 0.35,
+        "false_negatives": 30,
+        "false_positives": 293,
+        "rejected_share": 0.62875,
+        "cost": 443.0
+      },
+      {
+        "threshold": 0.4,
+        "false_negatives": 45,
+        "false_positives": 243,
+        "rejected_share": 0.5475,
+        "cost": 468.0
+      },
+      {
+        "threshold": 0.45,
+        "false_negatives": 56,
+        "false_positives": 182,
+        "rejected_share": 0.4575,
+        "cost": 462.0
+      },
+      {
+        "threshold": 0.5,
+        "false_negatives": 76,
+        "false_positives": 131,
+        "rejected_share": 0.36875,
+        "cost": 511.0
+      },
+      {
+        "threshold": 0.55,
+        "false_negatives": 103,
+        "false_positives": 92,
+        "rejected_share": 0.28625,
+        "cost": 607.0
+      },
+      {
+        "threshold": 0.6,
+        "false_negatives": 127,
+        "false_positives": 61,
+        "rejected_share": 0.2175,
+        "cost": 696.0
+      },
+      {
+        "threshold": 0.65,
+        "false_negatives": 157,
+        "false_positives": 29,
+        "rejected_share": 0.14,
+        "cost": 814.0
+      },
+      {
+        "threshold": 0.7,
+        "false_negatives": 188,
+        "false_positives": 13,
+        "rejected_share": 0.08125,
+        "cost": 953.0
+      },
+      {
+        "threshold": 0.75,
+        "false_negatives": 211,
+        "false_positives": 4,
+        "rejected_share": 0.04125,
+        "cost": 1059.0
+      },
+      {
+        "threshold": 0.8,
+        "false_negatives": 227,
+        "false_positives": 1,
+        "rejected_share": 0.0175,
+        "cost": 1136.0
+      },
+      {
+        "threshold": 0.85,
+        "false_negatives": 236,
+        "false_positives": 0,
+        "rejected_share": 0.005,
+        "cost": 1180.0
+      },
+      {
+        "threshold": 0.9,
+        "false_negatives": 240,
+        "false_positives": 0,
+        "rejected_share": 0.0,
+        "cost": 1200.0
+      },
+      {
+        "threshold": 0.95,
+        "false_negatives": 240,
+        "false_positives": 0,
+        "rejected_share": 0.0,
+        "cost": 1200.0
+      }
+    ]
+  },
+  "test": {
+    "at_default_threshold": {
+      "threshold": 0.5,
+      "roc_auc": 0.7876190476190476,
+      "pr_auc": 0.6396160632539595,
+      "accuracy": 0.72,
+      "precision_bad": 0.5238095238095238,
+      "recall_bad": 0.7333333333333333,
+      "f1_bad": 0.6111111111111112,
+      "confusion_matrix": {
+        "tn": 100,
+        "fp": 40,
+        "fn": 16,
+        "tp": 44
+      },
+      "rejected_share": 0.42,
+      "expected_cost": 120.0,
+      "expected_cost_per_applicant": 0.6
+    },
+    "at_chosen_threshold": {
+      "threshold": 0.32,
+      "roc_auc": 0.7876190476190476,
+      "pr_auc": 0.6396160632539595,
+      "accuracy": 0.53,
+      "precision_bad": 0.3835616438356164,
+      "recall_bad": 0.9333333333333333,
+      "f1_bad": 0.5436893203883495,
+      "confusion_matrix": {
+        "tn": 50,
+        "fp": 90,
+        "fn": 4,
+        "tp": 56
+      },
+      "rejected_share": 0.73,
+      "expected_cost": 110.0,
+      "expected_cost_per_applicant": 0.55
+    },
+    "baselines": {
+      "approve_everyone": {
+        "accuracy": 0.7,
+        "recall_bad": 0.0,
+        "expected_cost": 300.0
+      },
+      "reject_everyone": {
+        "accuracy": 0.3,
+        "recall_bad": 1.0,
+        "expected_cost": 140.0
+      }
+    },
+    "calibration": {
+      "mean_predicted_probability_test": 0.4506275336806753,
+      "actual_bad_rate_test": 0.3,
+      "note": "class_weight='balanced' shifts probabilities upwards; compare the score to the threshold rather than reading it as a calibrated default rate."
+    }
+  },
+  "protected_attribute_ablation": {
+    "without_protected": {
+      "cv_roc_auc_mean": 0.7927083333333332,
+      "cv_roc_auc_std": 0.06540804929646865,
+      "features": [
+        "duration",
+        "credit_amount",
+        "installment_commitment",
+        "residence_since",
+        "existing_credits",
+        "num_dependents",
+        "checking_status",
+        "credit_history",
+        "purpose",
+        "savings_status",
+        "employment",
+        "other_parties",
+        "property_magnitude",
+        "other_payment_plans",
+        "housing",
+        "job",
+        "own_telephone"
+      ]
+    },
+    "with_protected": {
+      "cv_roc_auc_mean": 0.7957961309523809,
+      "cv_roc_auc_std": 0.06332041957382836,
+      "features": [
+        "duration",
+        "credit_amount",
+        "installment_commitment",
+        "residence_since",
+        "existing_credits",
+        "num_dependents",
+        "age",
+        "checking_status",
+        "credit_history",
+        "purpose",
+        "savings_status",
+        "employment",
+        "other_parties",
+        "property_magnitude",
+        "other_payment_plans",
+        "housing",
+        "job",
+        "own_telephone",
+        "personal_status",
+        "foreign_worker"
+      ]
+    },
+    "roc_auc_difference": 0.0030877976190476497
+  },
+  "logistic_regression_top_coefficients": [
+    {
+      "feature": "purpose_used car",
+      "coefficient": -1.4937,
+      "odds_ratio": 0.2245
+    },
+    {
+      "feature": "checking_status_no checking",
+      "coefficient": -0.9964,
+      "odds_ratio": 0.3692
+    },
+    {
+      "feature": "other_parties_guarantor",
+      "coefficient": -0.9157,
+      "odds_ratio": 0.4002
+    },
+    {
+      "feature": "purpose_education",
+      "coefficient": 0.8423,
+      "odds_ratio": 2.3216
+    },
+    {
+      "feature": "credit_history_critical/other existing credit",
+      "coefficient": -0.8404,
+      "odds_ratio": 0.4316
+    },
+    {
+      "feature": "checking_status_<0",
+      "coefficient": 0.6917,
+      "odds_ratio": 1.9971
+    },
+    {
+      "feature": "savings_status_>=1000",
+      "coefficient": -0.6734,
+      "odds_ratio": 0.5099
+    },
+    {
+      "feature": "purpose_new car",
+      "coefficient": 0.6497,
+      "odds_ratio": 1.915
+    },
+    {
+      "feature": "savings_status_<100",
+      "coefficient": 0.5771,
+      "odds_ratio": 1.7808
+    },
+    {
+      "feature": "other_parties_co applicant",
+      "coefficient": 0.5544,
+      "odds_ratio": 1.7409
+    },
+    {
+      "feature": "other_payment_plans_none",
+      "coefficient": -0.5138,
+      "odds_ratio": 0.5982
+    },
+    {
+      "feature": "employment_4<=X<7",
+      "coefficient": -0.506,
+      "odds_ratio": 0.6029
+    },
+    {
+      "feature": "purpose_repairs",
+      "coefficient": 0.5,
+      "odds_ratio": 1.6487
+    },
+    {
+      "feature": "credit_history_no credits/all paid",
+      "coefficient": 0.4189,
+      "odds_ratio": 1.5203
+    },
+    {
+      "feature": "checking_status_0<=X<200",
+      "coefficient": 0.3983,
+      "odds_ratio": 1.4892
+    }
+  ],
+  "environment": {
+    "sklearn_version": "1.9.1",
+    "python_version": "3.13.5",
+    "trained_at": "2026-10-19T12:31:09+00:00"
+  }
+}

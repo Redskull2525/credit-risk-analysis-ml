@@ -1,0 +1,55 @@
+feature,coefficient,odds_ratio
+purpose_used car,-1.493699,0.22454
+checking_status_no checking,-0.996377,0.369215
+other_parties_guarantor,-0.915732,0.400224
+purpose_education,0.842273,2.321637
+credit_history_critical/other existing credit,-0.840361,0.431555
+checking_status_<0,0.691672,1.997051
+savings_status_>=1000,-0.673444,0.509949
+purpose_new car,0.649735,1.915033
+savings_status_<100,0.577072,1.780817
+other_parties_co applicant,0.55443,1.740948
+other_payment_plans_none,-0.513803,0.598216
+employment_4<=X<7,-0.506036,0.602881
+purpose_repairs,0.500003,1.648726
+credit_history_no credits/all paid,0.418878,1.520254
+checking_status_0<=X<200,0.398268,1.489244
+property_magnitude_no known property,0.39585,1.485646
+credit_history_all paid,0.383259,1.467058
+housing_rent,0.37751,1.458648
+duration,0.35392,1.424641
+other_parties_none,0.327436,1.387407
+purpose_radio/tv,-0.322451,0.724371
+credit_amount,0.321947,1.379811
+installment_commitment,0.303321,1.35435
+savings_status_500<=X<1000,0.293027,1.340479
+purpose_retraining,-0.292838,0.746143
+property_magnitude_real estate,-0.288937,0.749059
+savings_status_no known savings,-0.283222,0.753353
+employment_<1,0.264608,1.30292
+other_payment_plans_bank,0.26074,1.297891
+housing_for free,-0.231509,0.793336
+job_high qualif/self emp/mgmt,-0.231414,0.793411
+other_payment_plans_stores,0.219197,1.245077
+employment_unemployed,0.200552,1.222077
+own_telephone_yes,-0.182455,0.833222
+housing_own,-0.179867,0.835382
+purpose_domestic appliance,0.172894,1.18874
+property_magnitude_car,-0.151473,0.859441
+own_telephone_none,0.148589,1.160197
+checking_status_>=200,-0.127429,0.880356
+job_skilled,0.119389,1.126808
+employment_1<=X<4,0.081342,1.084742
+purpose_furniture/equipment,-0.075711,0.927084
+employment_>=7,-0.074332,0.928364
+job_unemp/unskilled non res,0.072225,1.074897
+num_dependents,-0.072102,0.930436
+savings_status_100<=X<500,0.052701,1.054114
+existing_credits,0.04673,1.047839
+purpose_business,-0.044737,0.956249
+purpose_other,0.030667,1.031142
+credit_history_existing paid,0.01423,1.014331
+property_magnitude_life insurance,0.010695,1.010752
+credit_history_delayed previously,-0.009871,0.990178
+residence_since,-0.009828,0.99022
+job_unskilled resident,0.005935,1.005953
